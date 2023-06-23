@@ -1,0 +1,98 @@
+[
+    {
+        "code": 1,
+        "name": "Dog Collar",
+        "avatar": "/assets/images/dogcollar.jpg",
+        "description": "A stylish and durable collar for dogs.",
+        "price": 19.99,
+        "category": "Accessories",
+        "animal": "Dog",
+        "active": true,
+        "isDeleted": false,
+        "comments": [
+            "Great quality and fits perfectly!",
+            "My dog loves this collar.",
+            "Highly recommended!"
+        ]
+    },
+    {
+        "code": 2,
+        "name": "Cat Toy Set",
+        "avatar": "/assets/images/cattoys.jpg",
+        "description": "An assortment of toys to keep your cat entertained.",
+        "price": 12.99,
+        "category": "Toys",
+        "animal": "Cat",
+        "active": true,
+        "isDeleted": false,
+        "comments": [
+            "My cat can't get enough of these toys!",
+            "Great value for the price.",
+            "Highly recommended for cat owners!"
+        ]
+    },
+    {
+        "code": 3,
+        "name": "Bird Cage",
+        "avatar": "/assets/images/birdcage.jpg",
+        "description": "A spacious cage for your pet bird.",
+        "price": 59.99,
+        "category": "Cages",
+        "animal": "Bird",
+        "active": true,
+        "isDeleted": false,
+        "comments": [
+            "The cage is well-built and easy to clean.",
+            "My bird loves the extra space!",
+            "Highly satisfied with this purchase."
+        ]
+    },
+    {
+        "code": 4,
+        "name": "Fish Food",
+        "avatar": "/assets/images/fishfood.jpg",
+        "description": "Nutritious food for your aquarium fish.",
+        "price": 6.99,
+        "category": "Food",
+        "animal": "Fish",
+        "active": true,
+        "isDeleted": false,
+        "comments": [
+            "My fish are thriving with this food.",
+            "Excellent quality and value.",
+            "Highly recommended for fish owners!"
+        ]
+    },
+    {
+        "code": 5,
+        "name": "Hamster Wheel",
+        "avatar": "/assets/images/hammsterwheel.jpg",
+        "description": "An exercise wheel for your pet hamster.",
+        "price": 8.99,
+        "category": "Toys",
+        "animal": "Hamster",
+        "active": true,
+        "isDeleted": false,
+        "comments": [
+            "My hamster enjoys running on this wheel.",
+            "Sturdy and well-designed.",
+            "Highly recommended for hamster owners!"
+        ]
+    },
+    {
+        "code": 6,
+        "name": "Reptile Terrarium",
+        "avatar": "/assets/images/terrarium.jpg",
+        "description": "A spacious terrarium for your pet reptile.",
+        "price": 79.99,
+        "category": "Habitats",
+        "animal": "Reptile",
+        "active": true,
+        "isDeleted": false,
+        "comments": [
+            "Perfect size and easy to maintain.",
+            "My reptile seems to love its new home.",
+            "Highly satisfied with this terrarium."
+        ]
+    }
+]
