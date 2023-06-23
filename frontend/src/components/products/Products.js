@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Division from './Division';
+import { ShopContext } from '../../context/ShopContext';
 
-export default function Products() {
+export default function Products(props) {
     const [products, setProducts] = useState([]);
-
+    const { addToCart, cartItems } = useContext(ShopContext);
     useEffect(() => {
         fetch('http://localhost:3001/products')
             .then((response) => response.json())
@@ -26,6 +27,11 @@ export default function Products() {
         acc[category].push(product);
         return acc;
     }, {});
+
+    const getCartItemAmount = (code) => {
+        const cartItem = cartItems.find((item) => item.code === code);
+        return cartItem ? cartItem.quantity : 0;
+    };
 
     return (
         <div className="container-fluid text-center">
@@ -55,6 +61,14 @@ export default function Products() {
                                             <a href={`/details/${product.code}`}>
                                                 <div className="btn btn-primary">Details</div>
                                             </a>
+                                        </div>
+                                        <div className="container">
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={() => addToCart(product.code)}
+                                            >
+                                                Add to Cart {getCartItemAmount(product.code) > 0 && <>({getCartItemAmount(product.code)}) </>}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -61,13 +61,16 @@ export default function ProductDetails() {
                         <p>Category: {selectedProduct.category}</p>
                         <p>Animal: {selectedProduct.animal}</p>
                     </h6>
-                    <div>
+                    {/* <div>
                         <p>Comments:</p>
                         <ul>
                             {selectedProduct.comments.map((comment, index) => (
                                 <li key={index}>{comment}</li>
                             ))}
                         </ul>
+                    </div> */}
+                    <div className="container">
+                        <div className="btn btn-primary">Add to Cart</div>
                     </div>
                 </div>
             </div>

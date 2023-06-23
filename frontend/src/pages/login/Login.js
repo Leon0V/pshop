@@ -17,7 +17,9 @@ export default function Login() {
                             <label for="floatingPassword">Password</label>
                         </div>
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                        <button class="w-100 btn btn-lg btn-dark" type="submit">Sign up</button>
+                        <a href="/register">
+                            <button type="button" class="w-100 btn btn-lg btn-dark">Sign up</button>
+                        </a>
                         <hr class="my-4" />
                         <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
                     </form>

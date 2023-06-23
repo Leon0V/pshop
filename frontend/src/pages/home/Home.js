@@ -9,7 +9,7 @@ export default function Home() {
                         <a class="icon-link" href="/about">
                             Learn more
                         </a>
-                        <a class="icon-link" href="#">
+                        <a class="icon-link" href="/shop">
                             Buy
                         </a>
                     </div>
