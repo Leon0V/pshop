@@ -9,7 +9,6 @@ import NotFound from './pages/error/Error';
 import Shop from './pages/shop/Shop';
 import Details from './components/details/ProductDetails';
 import Orders from './components/orders/Orders';
-import { Cart } from './components/cart/Cart';
 import { ShopContextProvider } from './context/ShopContext';
 function AppRouter() {
     return (
@@ -26,7 +25,6 @@ function AppRouter() {
                         <Route path='/details/:code' element={<Details />} />
                         <Route path='*' element={<NotFound />} />
                         <Route path='/orders' element={<Orders />} />
-                        <Route path='/cart' element={<Cart />} />
                     </Routes>
                     <Footer />
                 </Router>

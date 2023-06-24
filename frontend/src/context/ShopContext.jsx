@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const ShopContext = createContext(null);
 
@@ -8,14 +8,10 @@ export const ShopContextProvider = (props) => {
 
     useEffect(() => {
         const data = window.localStorage.getItem("cart");
-        if (data !== null) setCartItems(JSON.parse(data));
-        console.log('data', data)
-        console.log("cart");
+        if (data !== null) {
+            setCartItems(JSON.parse(data));
+        }
     }, []);
-
-    useEffect(() => {
-        window.localStorage.setItem("cart", JSON.stringify(cartItems));
-    }, [cartItems]);
 
     useEffect(() => {
         fetch("http://localhost:3001/products")
@@ -23,25 +19,29 @@ export const ShopContextProvider = (props) => {
             .then((products) => setProducts(products));
     }, []);
 
+    const updateCartItems = (items) => {
+        setCartItems(items);
+        window.localStorage.setItem("cart", JSON.stringify(items));
+    };
+
     const addToCart = (code) => {
         if (products.length === 0) {
             return;
         }
 
-        setCartItems((prev) => {
-            const existingItem = prev.find((item) => item.code === code);
+        const existingItem = cartItems.find((item) => item.code === code);
 
-            if (existingItem) {
-                return prev.map((item) => {
-                    if (item.code === code) {
-                        return { ...item, quantity: item.quantity + 1 };
-                    }
-                    return item;
-                });
-            } else {
-                return [...prev, { code, quantity: 1 }];
-            }
-        });
+        if (existingItem) {
+            const updatedItems = cartItems.map((item) => {
+                if (item.code === code) {
+                    return { ...item, quantity: item.quantity + 1 };
+                }
+                return item;
+            });
+            updateCartItems(updatedItems);
+        } else {
+            updateCartItems([...cartItems, { code, quantity: 1 }]);
+        }
     };
 
     const removeFromCart = (code) => {
@@ -49,20 +49,15 @@ export const ShopContextProvider = (props) => {
             return;
         }
 
-        setCartItems((prev) => {
-            const updatedItems = [...prev];
-            const existingItem = updatedItems.find((item) => item.code === code);
-
-            if (existingItem) {
-                existingItem.quantity -= 1;
-                if (existingItem.quantity <= 0) {
-                    const index = updatedItems.indexOf(existingItem);
-                    updatedItems.splice(index, 1);
-                }
+        const updatedItems = cartItems.map((item) => {
+            if (item.code === code) {
+                return { ...item, quantity: item.quantity - 1 };
             }
-
-            return updatedItems;
+            return item;
         });
+
+        const filteredItems = updatedItems.filter((item) => item.quantity > 0);
+        updateCartItems(filteredItems);
     };
 
     const updateCartItemCount = (newAmount, code) => {
@@ -70,32 +65,43 @@ export const ShopContextProvider = (props) => {
             return;
         }
 
-        setCartItems((prev) => {
-            const updatedItems = [...prev];
-            const existingItem = updatedItems.find((item) => item.code === code);
-
-            if (existingItem) {
-                existingItem.quantity = newAmount;
+        const updatedItems = cartItems.map((item) => {
+            if (item.code === code) {
+                return { ...item, quantity: newAmount };
             }
-
-            return updatedItems;
+            return item;
         });
+
+        updateCartItems(updatedItems);
     };
 
     const checkout = () => {
-        setCartItems([]);
+        updateCartItems([]);
     };
 
-    const contextValue = {
-        cartItems,
-        addToCart,
-        updateCartItemCount,
-        removeFromCart,
-        checkout,
+    const getTotalCartAmount = () => {
+        let totalAmount = 0;
+        for (const item of cartItems) {
+            const itemInfo = products.find((product) => product.code === item.code);
+            if (itemInfo) {
+                totalAmount += item.quantity * itemInfo.price;
+            }
+        }
+        return totalAmount;
     };
 
     return (
-        <ShopContext.Provider value={contextValue}>
+        <ShopContext.Provider
+            value={{
+                products,
+                cartItems,
+                addToCart,
+                updateCartItemCount,
+                removeFromCart,
+                checkout,
+                getTotalCartAmount,
+            }}
+        >
             {props.children}
         </ShopContext.Provider>
     );

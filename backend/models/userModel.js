@@ -5,13 +5,20 @@ const userSchema = new mongoose.Schema({
     name: String,
     surname: String,
     birthdate: Date,
-    cellphone: String,
+    phone: String,
     address: String,
+    complement: String,
     city: String,
     state: String,
+    country: String,
     active: Boolean,
     isDeleted: Boolean,
-    avatar: String
+    avatar: String,
+    cardNumber: String,
+    cardHolder: String,
+    cvc: String,
+    email: String,
+    password: String
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import api from '../../services/api';
+
 
 export default function Register() {
     const [name, setName] = useState('');
@@ -40,6 +42,48 @@ export default function Register() {
         let input = event.target.value;
         let inputValue = input.slice(0, 20).trim();
         setPassword(inputValue);
+    }
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const bodyParam = {
+            name: name,
+            phoneNumber: phoneNumber,
+            address: address,
+            complement: complement,
+            city: city,
+            state: state,
+            country: country,
+            cardNumber: cardNumber,
+            cardHolder: cardHolder,
+            cvc: cvc,
+            email: email,
+            password: password
+        }
+
+        api.post('/register', bodyParam)
+            .then((response) => {
+                console.log(response.data)
+                alert("User " + response.data.userId + " has been successfully registered!")
+            })
+            .catch((err) => {
+                console.error(err)
+                alert("An error occurred! Please check the console.")
+            })
+            .finally(() => {
+                setName("")
+                setPhoneNumber("")
+                setAddress("")
+                setComplement("")
+                setCity("")
+                setState("")
+                setCountry("")
+                setCardNumber("")
+                setCardHolder("")
+                setCvc("")
+                setEmail("")
+                setPassword("")
+            })
     }
 
     return (
